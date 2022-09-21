@@ -22,15 +22,5 @@ const userT: userType = {
 const user: userClass = new userClass(userT)
 
 
-
-function hasAddress(user: userType): boolean {
-  return (typeof user.address !== undefined)
-}
-
-function hasGivenAge(requiredAge: number): any {
-  return (user: userType) => user.age >= requiredAge
-}
-
-
 console.log(`User ${user.user.name} is ${user.isAdult(18) ? 'adult' : 'minor'}`)
 console.log(`and has${user.hasAddress() ? '' : ' no'} address`)

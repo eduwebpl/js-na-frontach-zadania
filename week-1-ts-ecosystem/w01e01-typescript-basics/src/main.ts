@@ -6,7 +6,10 @@
  *
  * */
 
-const user: any = {
+import { userClass } from "./user/userClass"
+import { userType } from "./user/userType"
+
+const userT: userType = {
   name: 'Andy',
   age: 30,
   email: 'andy@mail-me-tommorow.com',
@@ -16,15 +19,18 @@ const user: any = {
   },
 }
 
-function hasAddress(user: any): any {
-  return Boolean(user.address)
+const user: userClass = new userClass(userT)
+
+
+
+function hasAddress(user: userType): boolean {
+  return (typeof user.address !== undefined)
 }
 
-function hasGivenAge(requiredAge: any): any {
-  return (user: any): any => user.age >= requiredAge
+function hasGivenAge(requiredAge: number): any {
+  return (user: userType) => user.age >= requiredAge
 }
 
-const isAdult = hasGivenAge(18)
 
-console.log(`User ${user.name} is ${isAdult(user) ? 'adult' : 'minor'}`)
-console.log(`and has${hasAddress(user) ? '' : ' no'} address`)
+console.log(`User ${user.user.name} is ${user.isAdult(18) ? 'adult' : 'minor'}`)
+console.log(`and has${user.hasAddress() ? '' : ' no'} address`)

@@ -16,6 +16,8 @@ const user: any = {
   },
 }
 
+// hello jabi!
+
 function hasAddress(user: any): any {
   return Boolean(user.address)
 }

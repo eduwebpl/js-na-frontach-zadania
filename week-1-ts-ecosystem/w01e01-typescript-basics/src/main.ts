@@ -21,6 +21,5 @@ const userT: userType = {
 
 const user: userClass = new userClass(userT)
 
-
 console.log(`User ${user.user.name} is ${user.isAdult(18) ? 'adult' : 'minor'}`)
 console.log(`and has${user.hasAddress() ? '' : ' no'} address`)

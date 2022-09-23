@@ -1,6 +1,6 @@
-import { article, p } from '../framework/dom-creators.js'
+import { article, p } from '../framework/dom-creators.ts'
 import { cartItemSum } from './cart-item-sum.component.js'
-import { cartItem } from './cart-item.component.js'
+import { cartItem } from './cart-item.component.ts'
 
 export function cartPanel({ heading = 'Cart Items', items }) {
   const $article = article('panel is-primary my-6 w-75 mx-auto')

@@ -1,4 +1,4 @@
-import { div } from '../framework/dom-creators.js'
+import { div } from '../framework/dom-creators.ts'
 import { cartPanel } from './cart-panel.component.js'
 import { hero } from './hero.component.js'
 

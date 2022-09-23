@@ -1,6 +1,6 @@
-import { div } from '../framework/dom-creators.js'
-import { cartPanel } from './cart-panel.component.js'
-import { hero } from './hero.component.js'
+import { div } from '../framework/dom-creators'
+import { cartPanel } from './cart-panel.component'
+import { hero } from './hero.component'
 
 const items = [
   {

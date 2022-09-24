@@ -4,7 +4,7 @@ export const runExercise2 = async () => {
   const MyPowerSource2 = new PowerSource();
   const startTimestamp = new Date().getTime();
   try {
-    await new LightBulb("Lightbulb", MyPowerSource2).turnUpForTimeInSec(3);
+    await new LightBulb("Lightbulb for 6 sec", MyPowerSource2).turnUpForTimeInSec(6);
   } catch (e) {
     if (e instanceof Error) {
       console.error("Out of power :(");

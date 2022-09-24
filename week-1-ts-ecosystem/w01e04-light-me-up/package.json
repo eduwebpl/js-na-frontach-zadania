@@ -1,7 +1,6 @@
 {
   "name": "w01e04-light-me-up",
   "version": "1.0.0",
-  "type": "module",
   "scripts": {
     "start": "ts-node ./src/main.ts"
   },

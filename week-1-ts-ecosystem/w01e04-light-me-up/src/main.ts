@@ -45,11 +45,11 @@ export class LightBulb {
       const lightUpFor1Sec = () => {
         try {
           counter++;
+          this.turnUpFor1Sec();
           if (counter >= timeInSeconds) {
             clearInterval(interval);
             return resolve("Done");
           }
-          this.turnUpFor1Sec();
         } catch (e) {
           clearInterval(interval);
           reject(e);
@@ -63,7 +63,7 @@ export class LightBulb {
 }
 
 // ZAD 1
-await runExercise1();
+runExercise1();
 
 // ZAD 2
-await runExercise2();
+runExercise2();

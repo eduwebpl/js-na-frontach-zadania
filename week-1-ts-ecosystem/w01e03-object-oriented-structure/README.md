@@ -38,4 +38,4 @@ Główne problemy projektu:
    - nie ma większych wymagań co do samej konstrukcji produktu,
    - ważne, aby produkty był również tworzone za pomocą klas!
    - ważne, żeby miał nazwę, ilość oraz w przypadku kup teraz i aukcji — cenę.
-7. Zaprezentuj "zahardkodowane" działanie koszyk w pliku `main.ts` (finalnie `main.js`)
+7. Zaprezentuj "zahardkodowane" działanie koszyk w pliku `main.ts` (finalnie `main.ts`)

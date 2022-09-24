@@ -1,11 +1,11 @@
+import {  ReturnType  } from "../type";
 
-enum TagNameType {
+export  enum TagNameType {
   div = "div",
   p = "p",
   section = "section",
   article = "article"
 }
-type ReturnType = HTMLDivElement | HTMLElement | HTMLParagraphElement
 
 function createElement(tagName: TagNameType, className: string) : ReturnType {
   const element = document.createElement(tagName)
@@ -14,7 +14,6 @@ function createElement(tagName: TagNameType, className: string) : ReturnType {
   }
   return element
 }
-
 export const p = (className = '') => createElement(TagNameType.p, className)
 export const div = (className = '') => createElement(TagNameType.div, className)
 export const section = (className = '') => createElement(TagNameType.section, className)

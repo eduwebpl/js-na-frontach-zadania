@@ -1,6 +1,7 @@
-import { div, p, section } from '../framework/dom-creators.ts'
+import { div, p, section } from '../framework/dom-creators'
+import {HeroType} from "../type";
 
-export function hero({ title, subTitle }) {
+export const hero = ({ title, subTitle } :HeroType) => {
   const $heroSection = section('hero is-link')
   const $heroBody = div('hero-body')
   const $title = p('title')

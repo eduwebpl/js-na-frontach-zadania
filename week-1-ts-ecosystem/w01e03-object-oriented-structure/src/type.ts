@@ -12,5 +12,4 @@ export type ProductCart<Type extends ProductType> = {
 }
 
 export type CreateNewProductType<Type extends ProductType> = Omit<ProductCart<Type>,"amount" | "id">
-
-export type UpdateProductData<Type extends ProductType> =  Omit<Partial<ProductCart<Type>>, "id">
+export type UpdateProductData<Type extends ProductType> =  Omit<ProductCart<Type>, "id" | "name" | "type">

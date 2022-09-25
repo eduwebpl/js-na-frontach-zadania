@@ -16,31 +16,33 @@ const  AuctionShoppingCard = new ShopFactory<ProductType.AUCTION>()
 const  GetFreeShoppingCard = new ShopFactory<ProductType.GIVE_FOR_FREE>()
 
 
-BuyNowShoppingCard.addProduct(backPack)
-BuyNowShoppingCard.addProduct(wallet,4)
+BuyNowShoppingCard.addProductToShopCard(backPack)
+BuyNowShoppingCard.addProductToShopCard(wallet,4)
 
-AuctionShoppingCard.addProduct(bike)
-AuctionShoppingCard.addProduct(car,5)
+AuctionShoppingCard.addProductToShopCard(bike)
+AuctionShoppingCard.addProductToShopCard(car,5)
 
-GetFreeShoppingCard.addProduct(book)
-GetFreeShoppingCard.addProduct(shoes,5)
+GetFreeShoppingCard.addProductToShopCard(book)
+GetFreeShoppingCard.addProductToShopCard(shoes,5)
 
  //  IMPOSSIBLE !
 // BuyNowShoppingCard.addProduct(book,5)
 
 let myAllBuyNowProducts;
- myAllBuyNowProducts = BuyNowShoppingCard.getShopCartProducts()
+ myAllBuyNowProducts = BuyNowShoppingCard.getShopCardProducts()
 const allBuyNowProductsPrices = BuyNowShoppingCard.getAllProductsPrice()
 
 console.log("myAllProducts", myAllBuyNowProducts)
 console.log("allPrices", allBuyNowProductsPrices)
 
-BuyNowShoppingCard.updateShopCartProduct(backPack.id,{name:"Elegancki update", amount: 5000, price: 500})
-const updatedProduct = BuyNowShoppingCard.getProduct(backPack.id)
+
+ //We can only change amount and price in already existing product
+BuyNowShoppingCard.updateShopCardProduct(backPack.id,{ amount: 5000, price: 500})
+const updatedProduct = BuyNowShoppingCard.getShoCardProduct(backPack.id)
 console.log("updatedProduct", updatedProduct)
 
 BuyNowShoppingCard.deleteProduct(backPack.id)
-myAllBuyNowProducts = BuyNowShoppingCard.getShopCartProducts()
+myAllBuyNowProducts = BuyNowShoppingCard.getShopCardProducts()
 console.log("myAllProducts", myAllBuyNowProducts)
 
 const LengthAllProducts = BuyNowShoppingCard.getLengthAllProducts()

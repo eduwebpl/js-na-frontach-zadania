@@ -1,9 +1,10 @@
 import { ProductCart, ProductType,CreateNewProductType, UpdateProductData} from "./type";
 
 export class ShopFactory<Type extends ProductType> {
-    #shopCartProducts: ProductCart<Type>[] = []
+    #shopCardProducts: ProductCart<Type>[] = []
 
     static createNewProduct<Type extends ProductType>(product: CreateNewProductType<Type>): ProductCart<Type> {
+        // Of course, an ID generator should be used here, such as uuid
         const  calculation = Math.random()
         const splitCalculation = String(calculation).split(".")[1]
         const productID = Number(splitCalculation);
@@ -13,31 +14,31 @@ export class ShopFactory<Type extends ProductType> {
             id: Number(productID)
         }
     }
-    public getShopCartProducts(): ProductCart<Type>[]  {
-        return this.#shopCartProducts
+    public getShopCardProducts(): ProductCart<Type>[]  {
+        return this.#shopCardProducts
     }
     public getLengthAllProducts(): number {
-        const allProducts  = this.getShopCartProducts()
+        const allProducts  = this.getShopCardProducts()
         return allProducts.length ? allProducts.length : 0
     }
     public getAllProductsPrice(): number {
-        return this.#shopCartProducts.map(({price,amount})=> {
+        return this.#shopCardProducts.map(({price,amount})=> {
             return price && amount ? price  * amount : 0;
         }).reduce((prev,nex
         ) => prev + nex, 0);
     }
-    public getProduct(id: number): ProductCart<Type> |  undefined {
-        return  this.#shopCartProducts.find(p => p.id === id)
+    public getShoCardProduct(id: number): ProductCart<Type> |  undefined {
+        return  this.#shopCardProducts.find(p => p.id === id)
     }
-    addProduct(product: ProductCart<Type>, amount:number = 1): void {
-        this.#shopCartProducts.push({
+    addProductToShopCard(product: ProductCart<Type>, amount:number = 1): void {
+        this.#shopCardProducts.push({
             ...product,
             amount,
         })
 
     }
-    updateShopCartProduct(productID: ProductCart<Type>["id"], productData: UpdateProductData<Type>): void {
-        this.#shopCartProducts = this.#shopCartProducts.map(product => {
+    updateShopCardProduct(productID: ProductCart<Type>["id"], productData: UpdateProductData<Type>): void {
+        this.#shopCardProducts = this.#shopCardProducts.map(product => {
             if (product.id === productID) {
                 return {
                     ...product,
@@ -48,5 +49,5 @@ export class ShopFactory<Type extends ProductType> {
         })
     }
     deleteProduct(id: ProductCart<Type>["id"]): void {
-        this.#shopCartProducts = this.#shopCartProducts.filter(p => p.id !== id)}
+        this.#shopCardProducts = this.#shopCardProducts.filter(p => p.id !== id)}
 }

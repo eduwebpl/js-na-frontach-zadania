@@ -16,13 +16,13 @@ const  AuctionShoppingCard = new ShopFactory<ProductType.AUCTION>()
 const  GetFreeShoppingCard = new ShopFactory<ProductType.GIVE_FOR_FREE>()
 
 
-BuyNowShoppingCard.addProduct(backPack,3)
+BuyNowShoppingCard.addProduct(backPack)
 BuyNowShoppingCard.addProduct(wallet,4)
 
-AuctionShoppingCard.addProduct(bike,2)
+AuctionShoppingCard.addProduct(bike)
 AuctionShoppingCard.addProduct(car,5)
 
-GetFreeShoppingCard.addProduct(book,4)
+GetFreeShoppingCard.addProduct(book)
 GetFreeShoppingCard.addProduct(shoes,5)
 
  //  IMPOSSIBLE !

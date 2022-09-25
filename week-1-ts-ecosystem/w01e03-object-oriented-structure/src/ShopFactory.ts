@@ -29,7 +29,7 @@ export class ShopFactory<Type extends ProductType> {
     public getProduct(id: number): ProductCart<Type> |  undefined {
         return  this.#shopCartProducts.find(p => p.id === id)
     }
-    addProduct(product: ProductCart<Type>, amount:number): void {
+    addProduct(product: ProductCart<Type>, amount:number = 1): void {
         this.#shopCartProducts.push({
             ...product,
             amount,

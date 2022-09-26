@@ -1,92 +1,6 @@
 import inquirer from 'inquirer'
-import { readFileSync, writeFileSync } from 'fs'
-import path, { dirname } from 'path'
-import { fileURLToPath } from 'url'
-import { faker } from '@faker-js/faker/locale/pl'
-
-const filename = fileURLToPath(import.meta.url)
-const direcotryName = dirname(filename)
-const fileName = path.join(direcotryName, '../persistent-data/cart-items.json')
-
-type FreeItem = {
-  id: string
-  name: string
-  amount: number
-}
-
-type BuyNowItem = {
-  id: string
-  name: string
-  amount: number
-  price: number
-}
-type AuctionItem = {
-  id: string
-  name: string
-  amount: number
-  price: number
-}
-
-type CartItemsPersistance = {
-  forFree: FreeItem[]
-  buyNow: BuyNowItem[]
-  auctions: AuctionItem[]
-}
-
-const loadProductsData = (): CartItemsPersistance => {
-  const data = readFileSync(fileName).toString()
-  return JSON.parse(data)
-}
-
-const saveProductsData = (data: CartItemsPersistance): CartItemsPersistance => {
-  const newData = JSON.stringify(data, null, 2)
-  writeFileSync(fileName, newData)
-  return data
-}
-
-const saveProduct = (
-  type: 'auctions' | 'buyNow' | 'forFree',
-  data: { price?: number; name?: string; amount?: number }
-) => {
-  const savedData = loadProductsData()
-  switch (type) {
-    case 'forFree':
-      savedData.forFree.push({
-        name: data.name ?? faker.commerce.product(),
-        id: faker.datatype.uuid(),
-        amount: data.amount ?? faker.datatype.number({ min: 10, max: 500 }),
-      })
-      break
-    default:
-      savedData[type].push({
-        name: data.name ?? faker.commerce.product(),
-        id: faker.datatype.uuid(),
-        amount: data.amount ?? faker.datatype.number({ min: 10, max: 25 }),
-        price:
-          data.price ??
-          faker.datatype.number({
-            min: 10,
-            max: 500,
-            precision: 0.01,
-          }),
-      })
-  }
-  saveProductsData(savedData)
-}
-
-const removeProductsData = (productIds: string[]) => {
-  const savedData = loadProductsData()
-  savedData.auctions = savedData.auctions.filter(
-    (product) => !productIds.includes(product.id)
-  )
-  savedData.buyNow = savedData.buyNow.filter(
-    (product) => !productIds.includes(product.id)
-  )
-  savedData.forFree = savedData.forFree.filter(
-    (product) => !productIds.includes(product.id)
-  )
-  saveProductsData(savedData)
-}
+import { AuctionItem, BuyNowItem, FreeItem } from './shared/persistent.types'
+import { loadProductsData, removeProductsData, saveProduct } from './utils'
 
 const start = () => {
   inquirer
@@ -166,7 +80,7 @@ const generateData = () => {
           },
           {
             name: '"Aukcja" - auction',
-            value: 'auction',
+            value: 'auctions',
           },
         ],
       },

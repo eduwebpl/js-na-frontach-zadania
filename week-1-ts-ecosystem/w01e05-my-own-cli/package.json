@@ -4,7 +4,10 @@
   "description": "_~ \"Aplikacja do handlu\" strikes back 😱_",
   "main": "index.js",
   "scripts": {
-    "demo:prepare": "nodemon ./src/prepare-demo.ts"
+    "demo:prepare-dev": "tsc-watch --onSuccess 'node --experimental-specifier-resolution=node ./dist/prepare-demo.js'",
+    "demo:prepare": "tsc --build && node --experimental-specifier-resolution=node ./dist/prepare-demo.js",
+    "demo:start": "tsc --build && node --experimental-specifier-resolution=node ./dist/showcase-demo.js",
+    "build": "tsc --build"
   },
   "type": "module",
   "author": "",
@@ -29,6 +32,7 @@
     "@faker-js/faker": "^7.5.0",
     "chalk": "^5.0.1",
     "cli-table": "^0.3.11",
+    "commander": "^9.4.0",
     "gradient-string": "^2.0.2",
     "inquirer": "^9.1.2",
     "pino": "^8.6.0"

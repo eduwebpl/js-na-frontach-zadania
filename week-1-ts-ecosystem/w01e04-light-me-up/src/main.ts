@@ -7,15 +7,73 @@
  * Pamiętaj `PowerSource` ma nie wiedzieć — kto z niego korzysta!
  * Dodatkowo — rzucać błąd, jeśli zapas mocy się wyczerpie.
  * */
+import {setInterval} from "timers/promises"
 
 class PowerSource {
-  private energySupply = 100
+    static energySupply = 100
 
-  consume(energy) {
+    static consume(energy: number): {error: string} | void {
+    if(this.energySupply <= 0) {
+        return {error: "YOU HAVEN'T MORE ENERGY !"}
+    }
     this.energySupply -= energy
+    console.log(`You have ${this.energySupply / 20} seconds of action left`)
+        console.log(`Your amount of energy is ${this.energySupply}`)
   }
 }
 
-class LightBulb {
+export class LightBulb extends PowerSource {
   protected readonly powerConsumption = 20
-}
+  consumePower(): {error: string} | void {
+    return PowerSource.consume(this.powerConsumption)
+  }
+   #getCurrentTime():string {
+      return new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '').split(' ')[1];
+  }
+
+     async longConsumePower(time: number){
+            const interval = 1000;
+            const miliseconds = time * interval;
+
+            return new Promise(async (resolve, reject) => {
+               for await (const startTime of setInterval(interval, Date.now())) {
+                   const response = this.consumePower()
+                   if(response) {
+                      return  reject(response.error)
+                   }
+                   const now = Date.now()
+                   console.log(this.#getCurrentTime());
+                   if ((now - startTime) > miliseconds) {
+                       return resolve("time has been Finish")
+
+                   }
+               }
+           })
+
+    }
+        }
+
+// First Task
+
+// const LightOne = new LightBulb()
+// const LightII  = new LightBulb()
+// const LightIII  = new LightBulb()
+// const LightIV  = new LightBulb()
+// const LightV  = new LightBulb()
+// const LightVI  = new LightBulb()
+//
+// LightOne.consumePower()
+// LightII.consumePower()
+// LightIII.consumePower()
+// LightIV.consumePower()
+// LightV.consumePower()
+
+//Error !
+// LightVI.consumePower()
+
+
+
+//Second task
+const LightI = new LightBulb()
+LightI.longConsumePower(5).then((res: any)=> console.log(res.toUpperCase())).catch((err: any)=> console.log(err))
+

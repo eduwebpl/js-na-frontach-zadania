@@ -27,9 +27,10 @@ export class LightBulb extends PowerSource {
   consumePower(): {error: string} | void {
     return PowerSource.consume(this.powerConsumption)
   }
-   #getCurrentTime():string {
-      return new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '').split(' ')[1];
-  }
+   #getCurrentTime():number {
+       console.log(new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '').split(' ')[1]);
+       return Date.now()
+   }
 
      async longConsumePower(time: number){
             const interval = 1000;
@@ -37,12 +38,11 @@ export class LightBulb extends PowerSource {
 
             return new Promise(async (resolve, reject) => {
                for await (const startTime of setInterval(interval, Date.now())) {
-                   const response = this.consumePower()
-                   if(response) {
-                      return  reject(response.error)
-                   }
-                   const now = Date.now()
-                   console.log(this.#getCurrentTime());
+                   const errorResponse = this.consumePower()
+                   if(errorResponse) return  reject(errorResponse.error)
+
+                   const now = this.#getCurrentTime()
+
                    if ((now - startTime) > miliseconds) {
                        return resolve("time has been Finish")
 
@@ -75,5 +75,5 @@ export class LightBulb extends PowerSource {
 
 //Second task
 const LightI = new LightBulb()
-LightI.longConsumePower(5).then((res: any)=> console.log(res.toUpperCase())).catch((err: any)=> console.log(err))
+LightI.longConsumePower(6).then((res: any)=> console.log(res.toUpperCase())).catch((err: any)=> console.log(err))
 

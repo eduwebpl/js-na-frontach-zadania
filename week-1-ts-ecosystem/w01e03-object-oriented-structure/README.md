@@ -17,7 +17,7 @@ Jednak nasz nieustraszony _TeamLead_ znalazł część logiki, która może pows
 
 Główne problemy projektu:
 
-- projektu jeszcze nie ma — trzeba go wybudować prawie od `0` 😘.
+- projektu jeszcze nie ma — trzeba go wybudować prawie od `0` .
 - nie da się "fizycznie przetestować" projektu, bo nie ma `GUI` ani `CLI` - trzeba to "zahardkodować", żeby potwierdzić, że działa.
 
 ### Zadanie:

@@ -9,13 +9,37 @@
  * */
 
 class PowerSource {
-  private energySupply = 100
+  #energySupply = 100;
 
-  consume(energy) {
-    this.energySupply -= energy
+  public consume(energy: number) {
+    if (this.#energySupply >= energy) {
+      this.#energySupply -= energy;
+    } else {
+      throw new Error("Not enough power");
+    }
+  }
+
+  showPowerSupply() {
+    return this.#energySupply;
   }
 }
 
 class LightBulb {
-  protected readonly powerConsumption = 20
+  protected readonly powerConsumption = 20;
+
+  connect(powerSource: PowerSource) {
+    powerSource.consume(this.powerConsumption);
+  }
 }
+
+const lightBulb = new LightBulb();
+const lightBulb2 = new LightBulb();
+
+const powerSource = new PowerSource();
+
+lightBulb.connect(powerSource);
+console.log(powerSource.showPowerSupply());
+lightBulb2.connect(powerSource);
+console.log(powerSource.showPowerSupply());
+
+export {};

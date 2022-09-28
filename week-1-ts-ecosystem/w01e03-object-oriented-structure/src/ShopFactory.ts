@@ -6,12 +6,11 @@ export class ShopFactory<Type extends ProductType> {
     static createNewProduct<Type extends ProductType>(product: CreateNewProductType<Type>): ProductCart<Type> {
         // Of course, an ID generator should be used here, such as uuid
         const  calculation = Math.random()
-        const splitCalculation = String(calculation).split(".")[1]
-        const productID = Number(splitCalculation);
+        const productID = String(calculation).split(".")[1]
         return  {
             ...product,
             amount: 1,
-            id: Number(productID)
+            id: productID
         }
     }
     public getShopCardProducts(): ProductCart<Type>[]  {
@@ -27,7 +26,7 @@ export class ShopFactory<Type extends ProductType> {
         }).reduce((prev,nex
         ) => prev + nex, 0);
     }
-    public getShoCardProduct(id: number): ProductCart<Type> |  undefined {
+    public getShoCardProduct(id: string): ProductCart<Type> |  undefined {
         return  this.#shopCardProducts.find(p => p.id === id)
     }
     addProductToShopCard(product: ProductCart<Type>, amount:number = 1): void {

@@ -4,7 +4,7 @@ export enum ProductType {
     GIVE_FOR_FREE = "GIVE_FOR_FREE",
 }
 export type ProductCart<Type extends ProductType> = {
-    id: number,
+    id: string,
     type: Type,
     name: string,
     amount:  number,

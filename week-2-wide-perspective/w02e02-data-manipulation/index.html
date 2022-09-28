@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Orders Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma/css/bulma.min.css">
+  <script type="module" src="src/main.js" defer></script>
+  <style>
+    [data-content] {
+        font-size: 3em;
+        text-align: center;
+        margin: auto;
+        font-weight: bold;
+    }
+
+    .is-height-80 {
+        height: 80%
+    }
+
+    .has-bg-mountains {
+        background: url("https://picsum.photos/id/327/1920/1080") center no-repeat;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero is-info">
+    <div class="hero-body">
+      <p class="title">
+        Dashboard
+      </p>
+      <p class="subtitle">
+        Orders stats...
+      </p>
+    </div>
+  </header>
+  <main class="container mt-6">
+    <div class="tile is-ancestor">
+      <div class="tile is-vertical is-8">
+        <div class="tile">
+          <div class="tile is-parent is-vertical">
+            <article class="tile is-child notification" data-tile="best-sale">
+              <p class="title">Best sale</p>
+              <p class="subtitle">Single highest sold order</p>
+              <div class="has-text-danger" data-content>
+                <!-- Content -->
+              </div>
+            </article>
+            <article class="tile is-child notification" data-tile="total-orders">
+              <p class="title">Total orders</p>
+              <p class="subtitle">Number of orders</p>
+              <div data-content>
+                <!-- Content -->
+              </div>
+            </article>
+          </div>
+          <div class="tile is-parent">
+            <article class="tile is-child notification" data-tile="total-income">
+              <p class="title">Total income</p>
+              <p class="subtitle">Sum of sales for all orders</p>
+              <div class="is-flex is-align-items-center is-height-80">
+                <div class="has-text-link" data-content>
+                  <!-- Content -->
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="tile is-parent">
+          <article class="tile is-child notification is-flex has-bg-mountains" data-tile="best-sale">
+            <p class="subtitle has-text-light">brought to you by <cite>YourWiredStats.com</cite></p>
+          </article>
+        </div>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child notification is-warning" data-tile="annual-orders">
+          <div class="content">
+            <p class="title">Annual Orders</p>
+            <p class="subtitle" data-subtitle></p>
+            <ul class="panel" data-panel>
+              <!-- Content -->
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

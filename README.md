@@ -25,3 +25,10 @@ Na tym repozytorium będą pojawiać się zadania do kursu [JS na Wszystkich Fro
 > Pamiętajcie o osobnych branch'ach i o ew. przygotowaniu do `/code-review`  
 > Powodzenia !
 
+### `w02` Tydzień II — Szeroka perspektywa web developmentu
+> Hej, odblokowaliśmy dla Was zadania z tygodnia #2.  
+> Są dostępne w folderze [/week-2-wide-perspective](week-2-wide-perspective)  
+> Pamiętajcie o osobnych branch'ach oraz aktualizacji swoich `/main` w forkach (_Sync_)! 
+> 
+> Powodzenia !
+

@@ -153,6 +153,10 @@ const generateData = () => {
             return 'Please provide integer value'
           }
 
+          if (amount > 8) {
+            return 'Max 8'
+          }
+
           return true
         },
       },
@@ -171,13 +175,20 @@ const generateData = () => {
         type: 'auctions' | 'buyNow' | 'forFree'
         genearteAgain: boolean
       }) => {
-        const { type } = answers
+        const {
+          type,
+          name,
+          price: priceAsString,
+          amount: amountAsString,
+        } = answers
+        const price = priceAsString ? Number(priceAsString) : undefined
+        const amount = amountAsString ? Number(amountAsString) : undefined
         const amountOfItemsToAdd = answers.fakeItemsAmount || 1
         for (let i = 0; i <= amountOfItemsToAdd; i++) {
           saveProduct(type, {
-            name: answers.name,
-            amount: Number(answers.amount),
-            price: Number(answers.price),
+            name,
+            amount,
+            price,
           })
         }
         if (answers.genearteAgain) {

@@ -111,7 +111,10 @@ const displayCart = (cart: CartType) => {
     case 'forFree':
       table = new Table({ head: ['Name', 'Amount'] })
       table.push(
-        ...FreeCart.products.map((product) => [product.name, product.amount])
+        ...FreeCart.products.map((product) => [
+          product.name,
+          product.amount.toString(),
+        ])
       )
       break
     case 'buyNow':
@@ -119,8 +122,8 @@ const displayCart = (cart: CartType) => {
       table.push(
         ...BuyNowCart.products.map((product) => [
           product.name,
-          product.amount,
-          product.price,
+          product.amount.toString(),
+          product.price.toString(),
         ])
       )
       break
@@ -129,8 +132,8 @@ const displayCart = (cart: CartType) => {
       table.push(
         ...AuctionCart.products.map((product) => [
           product.name,
-          product.amount,
-          product.price,
+          product.amount.toString(),
+          product.price.toString(),
         ])
       )
   }

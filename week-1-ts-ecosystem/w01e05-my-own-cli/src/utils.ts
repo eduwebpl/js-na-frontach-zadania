@@ -2,11 +2,21 @@ import { readFileSync, writeFileSync } from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { faker } from '@faker-js/faker/locale/pl'
-import { CartItemsPersistance } from './shared/persistent.types'
+import { CartItemsPersistance } from './persistent.types'
+import pino from 'pino'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const fileName = path.join(__dirname, '../persistent-data/cart-items.json')
+
+export const logger = pino({
+  transport: {
+    target: 'pino-pretty',
+    options: {
+      colorize: true,
+    },
+  },
+})
 
 export const loadProductsData = (): CartItemsPersistance => {
   const data = readFileSync(fileName).toString()

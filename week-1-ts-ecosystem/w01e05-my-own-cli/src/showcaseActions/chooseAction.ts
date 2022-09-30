@@ -1,6 +1,6 @@
 import inquirer from 'inquirer'
 
-export type ActionTypes = 'remove' | 'add' | 'update' | 'display' | 'otherCart'
+export type ActionTypes = 'remove' | 'add' | 'display' | 'otherCart'
 export type CartType = 'buyNow' | 'forFree' | 'auctions'
 
 export const chooseAction = (
@@ -26,10 +26,6 @@ export const chooseAction = (
           {
             name: 'Dodać produkt',
             value: 'add',
-          },
-          {
-            name: 'Zaktualizować produkt',
-            value: 'update',
           },
           {
             name: 'Wyświetlić koszyk',

@@ -1,15 +1,22 @@
 import { program } from 'commander'
-import { loadProductsData, removeProductsData, saveProduct } from './utils'
 import {
   ActionTypes,
   CartType,
   chooseAction,
 } from './showcaseActions/chooseAction'
 import { chooseCart } from './showcaseActions/chooseCart'
-import { Cart, ProductTypes } from './shared/Cart'
-import { AuctionProduct, BuyNowProduct, FreeProduct } from './shared/Products'
+import {
+  AuctionProduct,
+  BuyNowProduct,
+  FreeProduct,
+} from './shared_w01e03/Products'
 import Table from 'cli-table'
 import { removeItems } from './showcaseActions/removeItems'
+import { addItems } from './showcaseActions/addItems'
+import { faker } from '@faker-js/faker/locale/pl'
+import { logger } from './utils'
+import { DataRepository } from './DataRepository'
+import { PersistantCart } from './PersistantCart'
 
 program
   .name('demo-showcase')
@@ -23,87 +30,7 @@ const options: { persistence: boolean } = program.opts() || {
   persistence: false,
 }
 
-type PersistantKey = 'auctions' | 'buyNow' | 'forFree'
-
-class DataRepository<Type extends ProductTypes> {
-  #persistenceKey: PersistantKey
-  #persistence: boolean
-  constructor(persistenceKey: PersistantKey, persistence = false) {
-    this.#persistenceKey = persistenceKey
-    this.#persistence = persistence
-  }
-
-  updatePersistence(products: Type[]) {
-    if (!this.#persistence) {
-      console.log('Updating json file skipped')
-      return
-    }
-    const productsToremove = products.map((product) => product.id)
-    removeProductsData(productsToremove)
-    products.forEach((product) => {
-      saveProduct(this.#persistenceKey, { ...product })
-    })
-  }
-
-  getProductsFromPersistence(): Type[] {
-    const savedData = loadProductsData()
-    switch (this.#persistenceKey) {
-      case 'auctions':
-        return savedData[this.#persistenceKey].map(
-          (product) =>
-            new AuctionProduct(
-              product.id,
-              product.name,
-              product.amount,
-              product.price
-            ) as Type
-        )
-      case 'buyNow':
-        return savedData[this.#persistenceKey].map(
-          (product) =>
-            new BuyNowProduct(
-              product.id,
-              product.name,
-              product.amount,
-              product.price
-            ) as Type
-        )
-      case 'forFree':
-        return savedData[this.#persistenceKey].map(
-          (product) =>
-            new FreeProduct(product.id, product.name, product.amount) as Type
-        )
-    }
-  }
-}
-
-class PersistantCart<
-  ProductType extends ProductTypes
-> extends Cart<ProductType> {
-  #dataRepository: DataRepository<ProductType>
-  constructor(dataRepository: DataRepository<ProductType>) {
-    super()
-    this.#dataRepository = dataRepository
-    this.#dataRepository
-      .getProductsFromPersistence()
-      ?.forEach((product) => super.addProduct(product))
-  }
-
-  addProduct(product: ProductType) {
-    super.addProduct(product)
-    this.#dataRepository.updatePersistence(this.products)
-  }
-
-  updateProduct(product: ProductType) {
-    super.updateProduct(product)
-    this.#dataRepository.updatePersistence(this.products)
-  }
-
-  removeProduct(id: string) {
-    super.removeProduct(id)
-    this.#dataRepository.updatePersistence(this.products)
-  }
-}
+logger.info(`Persistence mode is: ${options.persistence}`)
 
 const AuctionsDataRepository = new DataRepository<AuctionProduct>(
   'auctions',
@@ -178,6 +105,7 @@ const removeItem = (cart: CartType) => {
       }))
       removeItems(options, ({ productIdsToRemove = [] }) => {
         productIdsToRemove.forEach((id) => FreeCart.removeProduct(id))
+        chooseAction(cart, handleAction)
       })
       break
     case 'buyNow':
@@ -187,6 +115,7 @@ const removeItem = (cart: CartType) => {
       }))
       removeItems(options, ({ productIdsToRemove = [] }) => {
         productIdsToRemove.forEach((id) => BuyNowCart.removeProduct(id))
+        chooseAction(cart, handleAction)
       })
       break
     case 'auctions':
@@ -196,9 +125,43 @@ const removeItem = (cart: CartType) => {
       }))
       removeItems(options, ({ productIdsToRemove = [] }) => {
         productIdsToRemove.forEach((id) => AuctionCart.removeProduct(id))
+        chooseAction(cart, handleAction)
       })
       break
   }
+}
+
+const addProduct = (cart: CartType) => {
+  addItems(cart, ({ amount, name, price }) => {
+    switch (cart) {
+      case 'forFree':
+        FreeCart.addProduct(
+          new FreeProduct(faker.datatype.uuid(), name, Number(amount))
+        )
+        break
+      case 'buyNow':
+        BuyNowCart.addProduct(
+          new BuyNowProduct(
+            faker.datatype.uuid(),
+            name,
+            Number(amount),
+            Number(price)
+          )
+        )
+        break
+      case 'auctions':
+        AuctionCart.addProduct(
+          new AuctionProduct(
+            faker.datatype.uuid(),
+            name,
+            Number(amount),
+            Number(price)
+          )
+        )
+        break
+    }
+    chooseAction(cart, handleAction)
+  })
 }
 
 const handleAction = (
@@ -210,11 +173,9 @@ const handleAction = (
       displayCart(cartType)
       return chooseAction(cartType, handleAction)
     case 'remove':
-      removeItem(cartType)
-      return chooseAction(cartType, handleAction)
+      return removeItem(cartType)
     case 'add':
-      displayCart(cartType)
-      return chooseAction(cartType, handleAction)
+      return addProduct(cartType)
     case 'otherCart':
       return start()
   }

@@ -1,7 +1,6 @@
 import inquirer from 'inquirer'
 
 export type ActionTypes = 'remove' | 'add' | 'update' | 'display' | 'otherCart'
-export type CartType = 'buyNow' | 'forFree' | 'auctions'
 
 export const removeItems = (
   options: { name: string; value: string }[],
@@ -10,10 +9,10 @@ export const removeItems = (
   inquirer
     .prompt([
       {
-        type: 'list',
-        message: 'Co chcesz zrobić?',
+        type: 'checkbox',
+        message: 'Który produkt usunąć?',
         name: 'productIdsToRemove',
-        choices: [options],
+        choices: [...options],
       },
     ])
     .then((anwsers) => callback(anwsers))

@@ -1,5 +1,5 @@
 import inquirer from 'inquirer'
-import { AuctionItem, BuyNowItem, FreeItem } from './shared/persistent.types'
+import { AuctionItem, BuyNowItem, FreeItem } from './persistent.types'
 import { loadProductsData, removeProductsData, saveProduct } from './utils'
 
 const start = () => {
@@ -117,10 +117,6 @@ const generateData = () => {
             return 'Please provide integer value'
           }
 
-          if (amount > 8) {
-            return 'You can generate max 8 items'
-          }
-
           return true
         },
       },
@@ -184,7 +180,7 @@ const generateData = () => {
         const price = priceAsString ? Number(priceAsString) : undefined
         const amount = amountAsString ? Number(amountAsString) : undefined
         const amountOfItemsToAdd = answers.fakeItemsAmount || 1
-        for (let i = 0; i <= amountOfItemsToAdd; i++) {
+        for (let i = 0; i < amountOfItemsToAdd; i++) {
           saveProduct(type, {
             name,
             amount,

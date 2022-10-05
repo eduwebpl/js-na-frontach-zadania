@@ -1,0 +1,21 @@
+### Log in user #1
+POST http://localhost:3300/users/sign-in
+Content-Type: application/json
+
+{
+  "email": "peter@reporterzz.com"
+}
+
+### Log in user #2
+POST http://localhost:3300/users/sign-in
+Content-Type: application/json
+
+{
+  "email": "donna@reporterzz.com"
+}
+
+
+### Get User reports
+GET http://localhost:3300/reports
+Content-Type: application/json
+Authorization: l8vst1ui

@@ -32,3 +32,9 @@ Na tym repozytorium będą pojawiać się zadania do kursu [JS na Wszystkich Fro
 > 
 > Powodzenia !
 
+### `w03` Tydzień III — Back-end na przykładzie NestJS
+> Hej, odblokowaliśmy dla Was zadania z tygodnia #3.  
+> Są dostępne w folderze [/week-3-nestjs-back-end](week-3-nestjs-back-end)  
+> Pamiętajcie o osobnych branch'ach oraz aktualizacji swoich `/main` w forkach (_Sync_)!
+>
+> Powodzenia !

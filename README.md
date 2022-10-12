@@ -38,3 +38,10 @@ Na tym repozytorium będą pojawiać się zadania do kursu [JS na Wszystkich Fro
 > Pamiętajcie o osobnych branch'ach oraz aktualizacji swoich `/main` w forkach (_Sync_)!
 >
 > Powodzenia !
+
+### `w04` Tydzień IV — Praca z bazami danych
+> Hej, odblokowaliśmy dla Was zadania z tygodnia #4.  
+> Są dostępne w folderze [/week-4-tests-and-persistence](week-4-tests-and-persistence)  
+> Pamiętajcie o osobnych branch'ach oraz aktualizacji swoich `/main` w forkach (_Sync_)!
+>
+> Powodzenia !

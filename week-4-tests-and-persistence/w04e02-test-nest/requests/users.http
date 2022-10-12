@@ -1,0 +1,9 @@
+### Get all Users (provide valid token to authorize)
+GET http://localhost:3000/users
+Content-Type: application/json
+Authorization: l95tk62o
+
+### Get one User
+GET http://localhost:3000/users/2
+Content-Type: application/json
+Authorization: l95tk62o

@@ -1,0 +1,17 @@
+### Log in user #1 (VALID)
+POST http://localhost:3000/users/sign-in
+Content-Type: application/json
+
+{
+  "email": "peter@myclient.com",
+  "password": "som3pa55w0rd"
+}
+
+### Log out user #1
+PUT http://localhost:3000/users/sign-out
+Content-Type: application/json
+Authorization: l95t5u9o
+
+{
+  "userId": 1
+}

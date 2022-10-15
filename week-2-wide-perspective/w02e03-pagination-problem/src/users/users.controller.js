@@ -1,21 +1,13 @@
 import { Router } from 'express'
+import paginationMiddleware from '../middlewares/pagination.js'
 import { usersRepository } from './users.repository.js'
 
 export const usersController = new Router()
 
-usersController.get('', (req, res) => {
-  const { skip, limit } = req.query
-  let computedSkip = 0
-  if (skip) {
-    computedSkip = Number(skip)
-  }
-  let computedLimit
-  if (limit) {
-    computedLimit = Number(limit)
-  }
+usersController.get('', paginationMiddleware({limitKey: 'limit', skipKey: 'skip'}), (req, res) => {
   const users = usersRepository.find({
-    skip: computedSkip,
-    limit: computedLimit,
+    skip: req.skip,
+    limit: req.limit,
   })
   res.json(users)
 })

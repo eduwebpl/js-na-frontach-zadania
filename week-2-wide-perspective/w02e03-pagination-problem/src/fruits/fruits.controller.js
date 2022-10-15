@@ -1,21 +1,13 @@
 import { Router } from 'express'
+import paginationMiddleware from '../middlewares/pagination.js'
 import { fruitsRepository } from './fruits.repository.js'
 
 export const fruitsController = new Router()
 
-fruitsController.get('', (req, res) => {
-  const { skip, limit } = req.query
-  let computedSkip = 0
-  if (skip) {
-    computedSkip = Number(skip)
-  }
-  let computedLimit
-  if (limit) {
-    computedLimit = Number(limit)
-  }
+fruitsController.get('', paginationMiddleware({limitKey: 'limit', skipKey: 'drop'}), (req, res) => {
   const fruits = fruitsRepository.find({
-    skip: computedSkip,
-    limit: computedLimit,
+    skip: req.skip,
+    limit: req.limit,
   })
   res.json(fruits)
 })

@@ -45,3 +45,11 @@ Na tym repozytorium będą pojawiać się zadania do kursu [JS na Wszystkich Fro
 > Pamiętajcie o osobnych branch'ach oraz aktualizacji swoich `/main` w forkach (_Sync_)!
 >
 > Powodzenia !
+
+
+### `w05` Tydzień V — Aplikacja na produkcji & podstawy CI/CD
+> Hej, odblokowaliśmy dla Was zadania z tygodnia #5.  
+> Są dostępne w folderze [/week-5-ci-and-production](week-5-ci-and-production)  
+> Pamiętajcie o osobnych branch'ach oraz aktualizacji swoich `/main` w forkach (_Sync_)!
+>
+> Powodzenia !

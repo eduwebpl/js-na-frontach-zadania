@@ -1,0 +1,32 @@
+{
+  "name": "w05e01-npm-pipeline",
+  "version": "1.0.0",
+  "scripts": {
+    "transpile": "tsc",
+    "bundle": "rollup -c",
+    "copy-index": "fsbin copy index.html dist/index.html",
+    "serve": "live-server dist --port=8200 --wait 100 --open",
+    "test": "vitest --globals --environment jsdom",
+    "test:ui": "npm run test -- --ui",
+    "test:once": "npm run test -- --run"
+  },
+  "devDependencies": {
+    "@rollup/plugin-alias": "^4.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@testing-library/vue": "^6.6.1",
+    "@types/uuid": "^8.3.4",
+    "@vitest/ui": "^0.24.3",
+    "fsbin": "^1.0.11",
+    "jsdom": "^20.0.1",
+    "live-server": "^1.2.2",
+    "rollup": "^3.2.3",
+    "typescript": "^4.8.4",
+    "vitest": "^0.24.3"
+  },
+  "type": "module",
+  "dependencies": {
+    "uuid": "^9.0.0",
+    "vue": "^3.2.41",
+    "vue-router": "^4.1.5"
+  }
+}

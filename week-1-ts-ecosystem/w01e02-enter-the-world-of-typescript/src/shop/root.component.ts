@@ -1,7 +1,6 @@
 import { div } from '../framework/dom-creators.js'
 import { cartPanel } from './cart-panel.component.js'
 import { hero } from './hero.component.js'
-
 const items = [
   {
     name: 'Tomatoes',

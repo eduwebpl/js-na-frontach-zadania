@@ -1,5 +1,11 @@
 {
   "name": "w01e02-enter-the-world-of-typescript",
   "version": "1.0.0",
-  "scripts": {}
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "vite": "^3.1.8"
+  }
 }
